@@ -1,6 +1,151 @@
 fn main() {}
 
 /*
+// single or multiple traits implementation start here
+
+fn main() {
+    let d = Dog {
+        name: "Tommy".to_string(),
+        age: 4,
+    };
+    d.speak();
+    d.voice_level();
+
+    let d = Cat {
+        name: "Fluffy".to_string(),
+        age: 2,
+    };
+    d.speak();
+    d.voice_level();
+}
+
+struct Dog {
+    name: String,
+    age: i32,
+}
+
+struct Cat {
+    name: String,
+    age: i32,
+}
+
+trait Voice {
+    fn speak(&self);
+
+    fn voice_level(&self) {
+        println!("The default voice level is :: -1 ::");
+    }
+}
+
+impl Voice for Dog {
+    fn speak(&self) {
+        println!(
+            "The dog name is :: {} :: and age is :: {} :: ",
+            self.name, self.age
+        );
+        println!("we added a voice using the voice trait to DOG");
+    }
+}
+
+impl Voice for Cat {
+    fn speak(&self) {
+        println!(
+            "The cat name is :: {} :: and age is :: {} :: ",
+            self.name, self.age
+        );
+        println!("we added a voice using the voice trait to CAT");
+    }
+    fn voice_level(&self) {
+        println!("The voice level for cat has been changed to :: -10  ::");
+    }
+}
+
+// single or multiple traits implementation end here
+
+*/
+
+/*
+// generic function start here
+fn main() {
+    println!("The non generic solution is :: {} ::", max_i32(2, 3));
+    println!("The non generic solution is :: {} ::", max_f32(12.3, 3.12));
+
+    println!("The generic solution is :: {} ::", max_generic(12, 30));
+    println!(
+        "The generic solution is :: {} ::",
+        max_generic(31.14, 30.12)
+    );
+}
+
+fn max_i32(a: i32, b: i32) -> i32 {
+    if b > a {
+        return b;
+    } else {
+        return a;
+    }
+}
+
+fn max_f32(a: f32, b: f32) -> f32 {
+    if b > a {
+        return b;
+    } else {
+        return a;
+    }
+}
+
+fn max_generic<T: PartialOrd>(a: T, b: T) -> T {
+    if b > a {
+        return b;
+    } else {
+        return a;
+    }
+}
+
+
+// generic function end here
+*/
+
+/*
+// generics introduction start here
+
+fn main() {
+    let mut vec_int: Vec<i32> = vec![5, 20];
+    vec_int.push(10);
+
+    println!("Vec = :: {:#?} ::", vec_int);
+
+    // not possible as the vec is of type int.
+    // vec_int.push()
+    let t: Data<i32> = Data { val: 10 };
+    println!("val = :: {} ::", t.val);
+    let t2: Data<String> = Data {
+        val: "ABC".to_string(),
+    };
+    println!("val = :: {} ::", t2.val);
+
+    let p = PointXY { x: 10, y: 20 };
+
+    println!("x = :: {} :: and y = :: {} ::", p.x, p.y);
+
+    let p = PointXY { x: 10.12, y: 20.0 };
+
+    println!("x = :: {} :: and y = :: {} ::", p.x, p.y);
+}
+
+struct Data<T> {
+    val: T,
+}
+
+struct PointXY<T> {
+    x: T,
+    y: T,
+}
+
+
+// generics introduction end here
+*/
+
+/*
 unwrap and expect
 use std::fs::File;
 

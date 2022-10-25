@@ -243,3 +243,63 @@
 * write code for multiple contexts with different types, more concise and clean code by reducing code complexity and type safty.
 * can be applied to methods functions, structures, enumerations, collections and traits.
 * the `<T>` syntax known as the type paramerter, is used to declare a generic construct. T represents any data-type.
+
+
+# Generic Struct
+* we can define struct to use a generic type parameter in one or more fileds using the `<>` syntax
+  * ::syntax::
+    ```rust
+    struct Data<T> {
+        val: T
+    }
+    
+    ```
+
+# Generic function
+* place the generics in signature of function where we would usually specify data types of parameters and return value.
+* Make code more flexible and provides more functionality to callers of our function.
+* prevents code duplication.
+* ::syntax::
+  ```rust
+    fn foo<t> (a: T, b: T) -> T {
+    //..
+    }
+    ```
+  * function foo is a generic over some type T.
+  * This function has 2 parameter named a and b.
+  * The function will return a value of the same type T.
+
+# Traits
+
+* A trait tells the rust compiler about fucntionality a particular type has and can share with other types
+* Define shared behaviour in an abstract way. We can use trait bounds to specify that a generic can be any type that has certain behaviour.
+* Similler to interfaces in other languages, with some differences.
+
+# define traits(defining a trait)
+* ::syntax::
+  ```rust
+    trait tait_x {
+        fn method1(&self); // abstrac or method which is empty.
+        
+        // this is already implimented
+        fn method2(&self) {  // concrete methods.
+            //..
+        } 
+     }
+    ```
+  
+# implementation traits for a struct
+* ::syntax::
+  ```rust
+    struct A {...}
+    trait trait1 {
+        fn foo1(&self);
+  }    
+  
+  impl trait1 for A {
+    fn foo1(&self) {
+        // todo!()
+    } 
+  }
+    ```
+# trait bounds
