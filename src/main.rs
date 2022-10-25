@@ -1,5 +1,284 @@
 fn main() {}
 
+/*
+unwrap and expect
+use std::fs::File;
+
+fn main() {
+    let _f = File::open("dummys.txt").expect("The file can be anything idot so ignore this.");
+}
+
+ */
+
+/*
+Recoverable and unrecorable errors start here
+use std::fs::File;
+
+fn main() {
+    // panic!("Some unexpected situation!");
+
+    // let v = vec![1, 2, 3];
+    // unrecoverable error and backtracking.
+    // println!("{}", v[10]);
+
+    let f = File::open("dummy.txt");
+    let _f = match f {
+        Ok(file) => file,
+        Err(error) => {
+            panic!("Problem opening file :: {:?}", error)
+        }
+    };
+}
+
+Recoverable and unrecorable errors end here
+*/
+/*
+Pattern matching start here
+fn main() {
+    print_tshirt_size(TShirtSize::Small);
+    print_tshirt_size(TShirtSize::Medium);
+    print_tshirt_size(TShirtSize::Large);
+    print_tshirt_size(TShirtSize::Xlarge);
+}
+
+fn print_tshirt_size(size: TShirtSize) {
+    match size {
+        TShirtSize::Small => {
+            println!("The shirt size is :: small:: !");
+        }
+        TShirtSize::Medium => {
+            println!("The shirt size is :: Medium :: !");
+        }
+        TShirtSize::Large => {
+            println!("The shirt size is :: Large :: !");
+        }
+        _ => {
+            println!("The shirt default value is :: Xlarge ::")
+        }
+    }
+}
+
+enum TShirtSize {
+    Small,
+    Medium,
+    Large,
+    Xlarge,
+}
+
+Pattern matching end here
+*/
+
+/*
+Option Enum start here
+fn main() {
+    let value = is_odd(10);
+    println!("The option value returned is :: {:?} :: ", value);
+
+    println!("The option value returned is :: {:?} :: ", is_odd(11));
+}
+
+fn is_odd(num: i32) -> Option<bool> {
+    if num % 2 == 0 {
+        None
+    } else {
+        Some(true)
+    }
+}
+
+Option Enum end here
+*/
+/*
+Enum started here
+fn main() {
+    let mon = Day::Monday;
+    println!("mon :: {:?} ::", mon);
+    let p = Person {
+        name: String::from("ksjdbhfsdb"),
+        birthday: Day::Friday,
+    };
+    println!("The person struct is :: {:?}", p);
+}
+
+// print of enum is implimented we need to mark with this to make it printable.
+#[derive(Debug)]
+enum Day {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+}
+
+#[derive(Debug)]
+struct Person {
+    name: String,
+    birthday: Day,
+}
+
+Enum enum here
+*/
+
+/* ways of the struct methods start here
+fn main() {
+    let rect = Rectangle {
+        width: 21,
+        length: 23,
+    };
+    let area = rect.area(2);
+
+    println!("The total area computed via the methods is :: {area} ::")
+}
+
+struct Rectangle {
+    width: u32,
+    length: u32,
+}
+
+impl Rectangle {
+    fn area(&self, i: u32) -> u32 {
+        self.width * self.length * i
+    }
+}
+ways of the struct methods end here
+*/
+
+/* ways of the struct start
+// area of a rectangle
+// different ways of doing things with and without different kinds of structs
+fn main() {
+    let length: u32 = 10;
+    let width: u32 = 20;
+    let area = area1(length, width);
+    println!("The area is :: {area} ::");
+    let rect1 = RectangleWL(10, 30);
+    let area1 = area2(rect1);
+    println!("The new area with tuple struct is :: {area1} ::");
+
+    let rect2 = Reactangle {
+        length: 10,
+        width: 300,
+    };
+    let area2 = area3(rect2);
+    println!("The new area with tuple struct is :: {area2} ::");
+}
+
+struct Reactangle {
+    length: u32,
+    width: u32,
+}
+
+struct RectangleWL(u32, u32);
+
+fn area3(rect: Reactangle) -> u32 {
+    rect.length * rect.width
+}
+
+fn area2(rect: RectangleWL) -> u32 {
+    rect.0 * rect.1
+}
+
+fn area1(length: u32, width: u32) -> u32 {
+    length * width
+}
+
+ways of the struct end
+ */
+
+/* struct starts here
+
+// structs starts here
+fn main() {
+    let user1 = User {
+        username: String::from("Deesh"),
+        sign_in_count: 1,
+        is_active: true,
+        email: String::from("internetwasmyidea@gmail.com"),
+    };
+
+    println!(
+        "Email id :: {} :: {} :: {} :: {} ::",
+        user1.email, user1.is_active, user1.username, user1.sign_in_count
+    );
+
+    let user1: User = build_user(String::from("internetwasmyidea"), String::from("Somename"));
+    println!(
+        "Email id :: {} :: {} :: {} :: {} ::",
+        user1.email, user1.is_active, user1.username, user1.sign_in_count
+    );
+
+    let user2: User = build_user_alter(String::from("internetwasmyidea"), String::from("Somename"));
+    println!(
+        "Email id :: {} :: {} :: {} :: {} ::",
+        user2.email, user2.is_active, user2.username, user2.sign_in_count
+    );
+
+    // this is same as the below one
+    let user3 = User {
+        email: String::from("internetwasmyidea@gmail.com"),
+        username: String::from("Somename"),
+        is_active: user1.is_active,
+        sign_in_count: user1.sign_in_count,
+    };
+    println!(
+        "Email id :: {} :: {} :: {} :: {} ::",
+        user3.email, user3.is_active, user3.username, user3.sign_in_count
+    );
+
+    let user4 = User {
+        email: String::from("internetwsdfsdasmyidea@gmail.com"),
+        ..user2
+    };
+    println!(
+        "Email id :: {} :: {} :: {} :: {} ::",
+        user4.email, user4.is_active, user4.username, user4.sign_in_count,
+    );
+
+    let red = ColorRGB(255, 0, 0);
+    let blue = ColorRGB(0, 0, 255);
+    let magenta = add_colors(red, blue);
+    println!(
+        "magenta Color is :: [{}, {}, {}]",
+        magenta.0, magenta.1, magenta.2
+    );
+}
+
+fn add_colors(col1: ColorRGB, col2: ColorRGB) -> ColorRGB {
+    ColorRGB(col1.0 + col2.0, col1.1 + col2.1, col1.2 + col2.2)
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,
+        username,
+        is_active: true,
+        sign_in_count: 10,
+    }
+}
+
+// this can be written as above as well which will be initialized auto.
+fn build_user_alter(email: String, username: String) -> User {
+    User {
+        email: email,
+        username: username,
+        is_active: true,
+        sign_in_count: 10,
+    }
+}
+
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    is_active: bool,
+}
+
+struct ColorRGB(i32, i32, i32);
+
+struct(tuple and  normal structs)
+
+ struct end here */
+
 /* Slice starts here
 fn main() {
     let s = String::from(", Hello");
