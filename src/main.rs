@@ -1,4 +1,39 @@
-fn main() {}
+// # file struct start here
+use std::io::Write;
+
+fn main() {
+    let mut f = std::fs::File::create("hello.txt").expect("File creation failed");
+    f.write_all("First line".as_bytes())
+        .expect("Write to file failed");
+
+    f.write_all("\njhsdoifusfh".as_bytes())
+        .expect("SOme more error");
+
+    println!("Successfully written to file");
+}
+
+// # file struct end here
+
+/*
+//Read trait or readers, write trait or Writer start here
+
+// Input/Output
+
+use std::io::Write;
+
+fn main() {
+    let reader = std::io::stdin();
+    let mut line = String::new();
+    let data = reader.read_line(&mut line).unwrap();
+    println!("The data read is :: {line} :: and the length is :: {data} ::");
+
+    let mut writer = std::io::stdout();
+    let b = writer.write("hello world \n".as_bytes()).unwrap();
+    println!("The writer count is :: {b} ::")
+}
+//Read trait or readers, write trait or Writer end here
+
+ */
 
 /*
 // single or multiple traits implementation start here

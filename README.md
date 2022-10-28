@@ -199,14 +199,14 @@
 
 * match statement can be used to compare values in an enum
 * ::syntax::
-  * ```rust
-    match size {
+  ```rust
+     match size {
     TshirtSize::Small => println!("hlleo small");
     }
     ```
-  * All match options should be exhaustive(if you don;t define the values from the enum in the match it 
-     will show it as error).
-  * the placehold for the rest of the non defined options is `_`(placeholder).
+    * All match options should be exhaustive(if you don;t define the values from the enum in the match it
+      will show it as error).
+    * the placehold for the rest of the non defined options is `_`(placeholder).
 
 
 # error handling
@@ -287,8 +287,9 @@
         } 
      }
     ```
-  
-# implementation traits for a struct
+
+# implementating traits for a struct
+
 * ::syntax::
   ```rust
     struct A {...}
@@ -302,4 +303,72 @@
     } 
   }
     ```
+
 # trait bounds
+
+# stand I/O
+
+* rust standard library features for i/o are organized around 2 traits.
+    * read
+        * types that impliment read have methods for byte-oriented input
+          they are called `readers`.
+        * Stdin, File
+            * components that your program can read bytes from
+                * ex: Reading input from keyboard, files, etc
+            * `read_line()` method of this trait can be used to read data, one line at a time, from a file or
+              standard input stream.
+        * ::syntax::
+          ```rust
+            read_line(&mut line) -> Result
+           ```
+            * reads a line of text and appends it to line, which is a string.
+            * the return value is an io::Result, the number of bytes read.
+        * :ex:
+          ```rust
+            let reader  = std::io::stdin();
+            let mut line = String::new();
+            let b = reader.read_lin(&mut line).unwrap();
+           ```
+
+* write
+    * Types that implement write support both byte-oriented and UTF_8 text output.
+    * They are called writers.
+    * Stdout, File
+        * Components that your program can write bytes to
+            * ex: Priting values to console, writing to files, etc
+            * `write()` method of this trair can be used to write data to a file or standard output stream.
+                * ::syntax::
+              ```rust
+                write(&buf) -> Result
+               ```
+                * write some of the bytes in the slice buf to the underlying stream.
+                * the return value is an `io:Result`, the number of bytes written.
+            * :ex:
+              ```rust
+                let mut writer  = std::io::stdout();
+                let b = writer.write("xyz".as_bytes()).unwrap();
+               ```
+
+# file struct
+
+* represents a file
+* Allow read-write operations on a file
+* All methods in file struct return a variant of io::Result enumeration.
+    * widly used common methods.
+        * `open()` - open in read-only
+        * `create()` - open in write only, old content is destroyed.
+        * `remove_file()` - remove file from filesystem.
+        * `append()` - set option for append mode for file.
+        * `write_all()` - attempt to write entire buffer into this write.
+        * `read_to_string()` - read all bytes untill EOF in this source.
+    * ::syntax::
+      ```rust
+        // create
+        let mut f = create("hello.txt")
+      
+       // write
+       write_all("first line");
+       write_all("\nkjhbjkh");
+      ```
+
+#  
